@@ -14,7 +14,7 @@ function getPosts()
     $mysqli = openConex();
 
     // Utilizar una sentencia preparada
-    $stmt = $mysqli->prepare("SELECT id, title FROM post ORDER BY id DESC");
+    $stmt = $mysqli->prepare("SELECT * FROM post ORDER BY id DESC");
 
     $stmt->execute();
     $result = $stmt->get_result();
