@@ -9,6 +9,8 @@ sudo apt-get install apache2
 
 config firewall
 
+sudo ufw allow in "Apache"
+
 sudo ufw allow http
 sudo ufw allow https
 
@@ -153,3 +155,14 @@ sudo chmod +x /usr/local/bin/apache-update
 ahora con solo escribir apache-update da los permisos a los directorios
 
 
+instalar mysql
+sudo apt install mysql-server
+
+init secuencia configuracion
+sudo mysql_secure_installation
+
+https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-20-04-es
+
+instalar phpmyadmin
+https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-20-04-es
+sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl
