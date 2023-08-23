@@ -20,7 +20,7 @@ CREATE TABLE post (
   title varchar(200) NOT NULL,
   sinopsis varchar(800) NOT NULL,
   content TEXT NOT NULL,
-  image_url varchar(255) DEFAULT NULL;
+  image_url varchar(255) DEFAULT NULL,
   date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
  
