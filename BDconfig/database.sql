@@ -11,6 +11,7 @@ GRANT ALL PRIVILEGES ON paecblog.* TO 'paecadmin'@'localhost';
 FLUSH PRIVILEGES;
 
 -- Creacion de tablas
+USE paecblog;
 
 CREATE TABLE post (
   id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
