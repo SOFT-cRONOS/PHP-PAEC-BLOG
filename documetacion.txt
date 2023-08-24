@@ -165,4 +165,5 @@ https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mys
 
 instalar phpmyadmin
 https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-20-04-es
+
 sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl
