@@ -16,22 +16,28 @@
   <!-- End Header -->
 
   <main id="main">
-
-    <section class="inner-page mt-5">
+  <div class="banner-post align-items-center justify-content-center" style="width: 100%; height: 290px; overflow: hidden;">
+      <img src="<?php echo $post['image_url'] ?>" class="img-fluid" alt="">
+  </div>
+    <section class="inner-page">
       <div class="container">
-        <div class="banner-post mb-3" style="height: 100px; overflow: hidden;">
-          <img src="<?php echo $post['image_url'] ?>" class="img-fluid" alt="">
-        </div>
         <div class="row">
           <!-- barra izquierda -->
             <div class="col-1">
             
             </div>
           <!-- contenido post -->
-            <div class="col">
+            <div class="col contenido">
+              <div class=row>
+                <div class="col">
+                  <div>Fecha:<?php echo $post['date'] ?></div>
+                </div>
+                <div class="col">
+                  <div>Autor: <?php echo $post['author'] ?></div>
+                </div>
+              </div>
+              <hr class="separator">
               <h1><?php echo $post['title'] ?></h1>
-              <div><?php echo $post['date'] ?></div>
-              <div><?php echo $post['author'] ?></div>
               <br>
               <div>
                 <?php echo $post['content'] ?>
@@ -45,7 +51,7 @@
               </div>
             </div>
           <!-- barra derehca -->
-            <div class="col-4">
+            <div class="col-4 rightbar align-items-center justify-content-center">
               <?php
                 $posts = getPosts();
                 include "themes/rightbar.php";

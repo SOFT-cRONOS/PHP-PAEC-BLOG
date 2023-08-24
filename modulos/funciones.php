@@ -4,11 +4,25 @@
  require_once 'conect.php'; 
  
   
-function openConex(){
-    $conn=new mysqli(DBHOST, DBUSER, DBPWD, DBNAME); 
+function openConexORIG(){
+    $conn = new mysqli(DBHOST, DBUSER, DBPWD, DBNAME);
     return $conn;
 }    
-  
+
+function openConex(){
+    $conn = new mysqli(DBHOST, DBUSER, DBPWD, DBNAME);
+
+    // Verificar si hay errores de conexión
+    if ($conn->connect_error) {
+        die("Error de conexión: " . $conn->connect_error);
+    }
+
+    // Establecer la codificación de caracteres a UTF-8
+    $conn->set_charset("utf8");
+
+    return $conn;
+}
+
 function getPosts()
 {
     $mysqli = openConex();

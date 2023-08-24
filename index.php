@@ -8,7 +8,6 @@ include "themes/head.html";
 
 
 <body>
-
   <!-- ======= Header ======= -->
   <?php
   include "themes/navbar.html";
@@ -67,7 +66,7 @@ include "themes/head.html";
                 <p>Tutoriales y programas para mantenimiento, optimizacion y control del PC</p>
               </div>
             </div>
-
+            
             <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
               <div class="icon-box iconbox-yellow">
                 <div class="icon">

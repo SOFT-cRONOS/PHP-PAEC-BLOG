@@ -1,11 +1,13 @@
-<h1>Ultimos post <?php echo $categoria ?></h1>
+<h2>Ultimos post <?php echo $categoria;
+$contador = 0; ?></h2>
 <ul>
-<?php foreach ($posts as $post): ?>
+<?php foreach ($posts as $post): 
+    if ($contador < 4) {?>
 <li>
-<h2>
+<h5>
 <a href="post.php?id=<?php echo $post['id'] ?>">
     <div class="row">
-    <?php echo $post['title'] ?>
+    <h4><?php echo $post['title'] ?></h4>
     </div>
     <div class="row">
     <div class="col">
@@ -15,7 +17,10 @@
     </div>
 
 </a>
-<h2>
+<h5>
 
 </li>
-<?php endforeach; ?>
+<?php 
+        $contador++;
+    }
+endforeach; ?>
