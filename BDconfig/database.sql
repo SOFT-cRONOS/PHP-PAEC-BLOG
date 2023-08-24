@@ -35,3 +35,6 @@ INSERT INTO post (id, author, title, sinopsis, content, date, image_url) VALUES
 Python es utilizado en una amplia gama de aplicaciones, desde desarrollo web y aplicaciones móviles hasta análisis de datos, inteligencia artificial y automatización de tareas. Su amplia biblioteca estándar y su capacidad para integrarse con otros lenguajes y tecnologías hacen que sea fácil y rápido crear soluciones eficientes y robustas para diversos desafíos.
 
 En resumen, Python es un lenguaje poderoso que ofrece una combinación única de facilidad de uso y potencia, lo que lo convierte en una opción ideal para desarrolladores de todos los niveles que buscan crear soluciones efectivas y eficientes en una variedad de campos.', '2017-06-14 21:26:07', 'assets/img/images-post/python_lenguaje.jpg');
+
+-- en caso de necesitar
+ DROP TABLE nombre_base_de_datos;
