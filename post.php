@@ -51,7 +51,7 @@
               </div>
             </div>
           <!-- barra derehca -->
-            <div class="col-4 rightbar align-items-center justify-content-center">
+            <div class="col-3 rightbar align-items-center justify-content-center">
               <?php
                 $posts = getPosts();
                 include "themes/rightbar.php";

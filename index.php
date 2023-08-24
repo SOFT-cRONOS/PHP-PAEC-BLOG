@@ -106,6 +106,9 @@ include "themes/head.html";
     <!-- ======= UltimosPostSoftware======= -->
       <section id="ultimopost" class="">
         <div class="container">
+        <div class="section-title">
+            <h2>Esto te puede interesar</h2>
+        </div>
 
           <div class="row">
             <div class="col-lg-6">
@@ -143,7 +146,7 @@ include "themes/head.html";
         <div class="container">
 
           <div class="section-title">
-            <h2>Estos son los ultimos post</h2>
+            <h2>Explora el contenido mas reciente</h2>
             <p>Los ultimos posteos estan ordenados en esta seccion, navega y encontra la informacion que necesitas. Filtros por categoria y orden por fecha de cada post de este Portal.</p>
           </div>
 
@@ -169,18 +172,16 @@ include "themes/head.html";
                   <h4><?php echo $posteo['title'] ?></h4>
                   <p><?php echo $posteo['categoria'] ?></p>
                   <!-- <a href="" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a> -->
-                  <a href="post.php?id=<?php echo $post['id'] ?>" class="btn btn-primary">Leer articulo</a>
+                  <a href="post.php?id=<?php echo $posteo['id'] ?>" class="btn btn-primary">Ver+</a>
                 </div>
               </div>
             <?php endforeach; ?>
 
             <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-              <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
+              <img src="assets/img/plantilla.png" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
-                <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox details-link" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                <h4>Explorar Todo</h4>
+                <a href="categorias.php" class="btn btn-primary">Ver+</a>
               </div>
             </div>
 
@@ -191,75 +192,78 @@ include "themes/head.html";
     <!-- End Post Section Section -->
 
 
-    <!-- ======= Contact Section ======= -->
-      <section id="contact" class="contact">
-        <div class="container">
+<!-- ======= Sección de Contacto ======= -->
+<section id="contacto" class="contacto">
+    <div class="container">
 
-          <div class="section-title">
-            <h2>Contact</h2>
+        <div class="section-title">
+            <h2>Contacto</h2>
             <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-          </div>
+        </div>
 
-          <div class="row">
-
-            <div class="col-lg-6">
-
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="info-box">
-                    <i class="bx bx-map"></i>
-                    <h3>Our Address</h3>
-                    <p>A108 Adam Street, New York, NY 535022</p>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="info-box mt-4">
-                    <i class="bx bx-envelope"></i>
-                    <h3>Email Us</h3>
-                    <p>info@example.com<br>contact@example.com</p>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="info-box mt-4">
-                    <i class="bx bx-phone-call"></i>
-                    <h3>Call Us</h3>
-                    <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+        <div class="row">
 
             <div class="col-lg-6">
-              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+
                 <div class="row">
-                  <div class="col-md-6 form-group">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                  </div>
-                  <div class="col-md-6 form-group mt-3 mt-md-0">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                  </div>
+                    <div class="col-md-12">
+                        <div class="info-box">
+                            <i class="bx bx-map"></i>
+                            <h3>Nuestra Dirección</h3>
+                            <p>Calle A108, Ciudad de Buenos Aires, Argentina</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-box mt-4">
+                            <i class="bx bx-envelope"></i>
+                            <h3>Contáctanos por Email</h3>
+                            <p>info@ejemplo.com<br>contacto@ejemplo.com</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-box mt-4">
+                            <i class="bx bx-phone-call"></i>
+                            <h3>Llámanos</h3>
+                            <p>+54 11 1234 5678<br>+54 11 8765 4321</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group mt-3">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                </div>
-                <div class="form-group mt-3">
-                  <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                </div>
-                <div class="my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-                </div>
-                <div class="text-center"><button type="submit">Send Message</button></div>
-              </form>
+
             </div>
 
-          </div>
+            <div class="col-lg-6">
+                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Tu Nombre" required>
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Tu Email" required>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Asunto" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <textarea class="form-control" name="message" rows="5" placeholder="Mensaje" required></textarea>
+                    </div>
+                    <div class="my-3">
+                        <div class="loading">Cargando</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">¡Tu mensaje ha sido enviado. ¡Gracias!</div>
+                    </div>
+                    <div class="text-center"><button type="submit">Enviar Mensaje</button></div>
+                </form>
+            </div>
 
         </div>
-      </section>
-    <!-- End Contact Section -->
+
+    </div>
+</section>
+<!-- Fin de la Sección de Contacto -->
+
+
+
 
   </main><!-- End #main -->
 

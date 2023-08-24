@@ -71,8 +71,10 @@ h6 {
 }
 
 .contenido {
-  margin-top: -100px;
+  padding: 50px;
   background-color: white;
+  margin-top: -70px;
+  border-radius: 30px;
 }
 
 .rightbar {
@@ -83,7 +85,19 @@ h6 {
   list-style: none;
   align-items: center;
   text-align: center;
+  color:#343a40;
 }
+
+.rightbar p {
+  margin-top: 1.2rem;
+  color:#343a40;
+}
+
+.rightbar ul {
+  margin:0;
+  padding:0;
+}
+
 
 /*--------------------------------------------------------------
 # Back to top button
