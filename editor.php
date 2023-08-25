@@ -27,8 +27,8 @@
   <link href="assets/css/style.css" rel="stylesheet">
 
   <!-- CKEditor.  -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script src="ckeditor/ckeditor.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="assets/js/ckeditor5-document/ckeditor.js"></script>
 <body>
 
   <!-- ======= Header ======= -->
@@ -41,7 +41,35 @@
     <section class="inner-page">
       <div class="container mt-6">
         <!-- contenido -->
-        <textarea name="mensajes" id="mensajes"></textarea>
+
+
+        <h1>Editor de Blog</h1>
+
+        <!-- The toolbar will be rendered in this container. -->
+        <div id="toolbar-container"></div>
+
+        <!-- This container will become the editable. -->
+        <div id="editor">
+            <p>Cremos contenido!.</p>
+        </div>
+
+        <script>
+            DecoupledEditor
+                .create( document.querySelector( '#editor' ), {
+                removePlugins: [ 'insertmedia' ],
+                // toolbar: [ 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote' , 'link' ]
+                } )
+                .then( editor => {
+                    const toolbarContainer = document.querySelector( '#toolbar-container' );
+
+                    toolbarContainer.appendChild( editor.ui.view.toolbar.element );
+                } )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+
+
       </div>
     </section>
   </main><!-- End #main -->

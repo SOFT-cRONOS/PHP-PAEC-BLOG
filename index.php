@@ -2,7 +2,8 @@
 // conexion
 require_once 'modulos/funciones.php'; 
 $post = getUltiPost();
-$posts = getPosts(); 
+$posts = getPosts();
+
 include "themes/head.html";
 ?>
 
@@ -26,12 +27,51 @@ include "themes/head.html";
 
   <main id="main">
 
+    <!-- ======= UltimosPostSoftware======= -->
+      <section id="ultimopost" class="">
+        <div class="container">
+          <div class="section-title">
+              <h2>Esto te puede interesar</h2>
+          </div>
+
+          <div class="row  justify-content-center">
+            <div class="col-lg-6">
+              <img src="<?php echo $post['image_url'] ?>" class="img-fluid" alt="">
+            </div>
+            <div class="col-lg-3 pt-4 pt-lg-0">
+              <h3><?php echo $post['title'] ?></h3>
+              <div class="row">
+                <div class="col-1">
+                  <i class="bx bx-receipt"></i>
+                </div>
+                <div class="col">
+                  <p>
+                    <?php echo $post['date'] ?>
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+
+                    <p><?php echo $post['sinopsis'] ?>...</p>
+                    <div class="col">
+                    <a class="botn-link" href="post.php?id=<?php echo $post['id'] ?>"> Ver mas +</a>
+                    </div>
+                    <p>Autor: <?php echo $post['nick'] ?></p>
+                    <p>Categoria: <?php echo $post['categoria'] ?></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    <!-- End UltimoPost -->
+
+  
     <!-- ======= Servicios Section ======= -->
-      <section id="Categorias" class="services">
+      <section id="servicios" class="services">
         <div class="container">
 
           <div class="section-title">
-            <h2>Contenido</h2>
+            <h2>+ Contenido</h2>
             <p>Esto es lo que tenemos para vos. Explora todo el contenido, categorias de los articulos y software disponible en este portal.</p>
           </div>
 
@@ -103,43 +143,6 @@ include "themes/head.html";
       </section>
     <!-- End Servicios Section -->
 
-    <!-- ======= UltimosPostSoftware======= -->
-      <section id="ultimopost" class="">
-        <div class="container">
-        <div class="section-title">
-            <h2>Esto te puede interesar</h2>
-        </div>
-
-          <div class="row">
-            <div class="col-lg-6">
-              <img src="<?php echo $post['image_url'] ?>" class="img-fluid" alt="">
-            </div>
-            <div class="col-lg-6 pt-4 pt-lg-0">
-              <h3><?php echo $post['title'] ?></h3>
-              <div class="row">
-                <div class="col-1">
-                  <i class="bx bx-receipt"></i>
-                </div>
-                <div class="col">
-                  <p>
-                    <?php echo $post['date'] ?>
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                    <p><?php echo $post['sinopsis'] ?>...</p>
-                    <a class="botn-link" href="post.php?id=<?php echo $post['id'] ?>"> Ver mas +</a>
-                    <p>Autor: <?php echo $post['author'] ?></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    <!-- End UltimoPost -->
-
-
 
     <!-- ======= PostSection ======= -->
       <section id="portfolio" class="portfolio">
@@ -154,9 +157,10 @@ include "themes/head.html";
             <div class="col-lg-12 d-flex justify-content-center">
               <ul id="portfolio-flters">
                 <li data-filter="*" class="filter-active">Todos</li>
-                <li data-filter=".apps">Apps</li>
-                <li data-filter=".tutorial">Tutoriales</li>
-                <li data-filter=".informatica">Informatica</li>
+                <?php $categorias = getCategorias();
+                foreach ($categorias as $filtro): ?>
+                  <li data-filter=".<?php echo $filtro['nombre'] ?>"><?php echo $filtro['nombre'] ?></li>
+                <?php endforeach; ?>
               </ul>
             </div>
           </div>

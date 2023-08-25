@@ -28,7 +28,14 @@ function getPosts()
     $mysqli = openConex();
 
     // Utilizar una sentencia preparada
-    $stmt = $mysqli->prepare("SELECT * FROM post ORDER BY id DESC");
+    // $stmt = $mysqli->prepare("SELECT * FROM post ORDER BY id DESC");
+    $stmt = $mysqli -> prepare("SELECT p.id, p.title, p.sinopsis, p.content, p.date, p.image_url, a.nick AS nick, c.nombre AS categoria
+                                FROM post p
+                                INNER JOIN autor a ON p.id_autor = a.id_autor
+                                INNER JOIN categorias c ON p.id_categoria = c.id_categoria
+                                ORDER BY p.id DESC
+                                LIMIT 30;"); 
+                                // limita a los 30 primeros registros
 
     $stmt->execute();
     $result = $stmt->get_result();
@@ -51,7 +58,14 @@ function getPostById($id)
     $mysqli = openConex();
 
     // Utilizar una sentencia preparada
-    $stmt = $mysqli->prepare("SELECT * FROM post WHERE id = ?");
+    // $stmt = $mysqli->prepare("SELECT * FROM post WHERE id = ?");
+    $stmt = $mysqli -> prepare("SELECT p.id, p.title, p.sinopsis, p.content, p.date, p.image_url, a.nick AS nick, c.nombre AS categoria
+                                FROM post p
+                                INNER JOIN autor a ON p.id_autor = a.id_autor
+                                INNER JOIN categorias c ON p.id_categoria = c.id_categoria
+                                WHERE id = ?
+                                ORDER BY p.id DESC");
+
     $stmt->bind_param("i", $id); // "i" indica que el parámetro es un entero
 
     $stmt->execute();
@@ -67,16 +81,19 @@ function getPostById($id)
 
 function getUltiPost()
 {
-    $conn = openConex();
-
-    // Verificar la conexión
-    if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
-    }
+    $mysqli = openConex();
 
     // Obtener el post más reciente
-    $query = "SELECT * FROM post ORDER BY date DESC LIMIT 1";
-    $result = $conn->query($query);
+    // $query = "SELECT * FROM post ORDER BY date DESC LIMIT 1";
+    $stmt = $mysqli -> prepare("SELECT p.id, p.title, p.sinopsis, p.content, p.date, p.image_url, a.nick AS nick, c.nombre AS categoria
+                                FROM post p
+                                INNER JOIN autor a ON p.id_autor = a.id_autor
+                                INNER JOIN categorias c ON p.id_categoria = c.id_categoria
+                                ORDER BY date DESC LIMIT 1");
+
+    $stmt->execute();
+    
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $post = $result->fetch_assoc();
@@ -86,7 +103,7 @@ function getUltiPost()
     }
 
     // Cerrar la conexión
-    $conn->close();
+    $stmt->close();
     
 }
 
@@ -95,7 +112,13 @@ function getPostsByCategory($category)
     $mysqli = openConex();
 
     // Utilizar una sentencia preparada
-    $stmt = $mysqli->prepare("SELECT * FROM post WHERE categoria = ?");
+    // $stmt = $mysqli->prepare("SELECT * FROM post WHERE categoria = ?");
+    $stmt = $mysqli -> prepare("SELECT p.id, p.title, p.sinopsis, p.content, p.date, p.image_url, a.nick AS nick, c.nombre AS categoria
+                                FROM post p
+                                INNER JOIN autor a ON p.id_autor = a.id_autor
+                                INNER JOIN categorias c ON p.id_categoria = c.id_categoria
+                                WHERE c.nombre = ?
+                                ORDER BY date DESC LIMIT 1");
     $stmt->bind_param("s", $category); // "s" indica que el parámetro es una cadena
 
     $stmt->execute();
@@ -110,6 +133,22 @@ function getPostsByCategory($category)
     $stmt->close();
 
     return $posts;
+}
+
+function getCategorias()
+{
+    $mysqli = openConex();
+
+    $stmt = $mysqli->prepare("SELECT nombre, detalle FROM categorias");
+
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    $stmt->close();
+
+    return $result;
+
 }
 
 ?>

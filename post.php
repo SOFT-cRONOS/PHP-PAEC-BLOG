@@ -33,7 +33,10 @@
                   <div>Fecha:<?php echo $post['date'] ?></div>
                 </div>
                 <div class="col">
-                  <div>Autor: <?php echo $post['author'] ?></div>
+                  <div>Autor: <?php echo $post['nick'] ?></div>
+                </div>
+                <div class="col">
+                  <div>Categoria: <?php echo $post['categoria'] ?></div>
                 </div>
               </div>
               <hr class="separator">

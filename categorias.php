@@ -63,9 +63,16 @@
           <h1>Categorias <?php echo $categoria ?></h1>
           <br>
           <br>
+          <?php 
+            if (empty($posts)) {
+            ?>
+              <h3 class= container>oh! no se encontro nada con <?php echo $categoria ?></h3>
+            <?php 
+            } else { ?>
           <ul>
-            <?php foreach ($posts as $post): ?>
-            <li style="
+            <?php 
+            foreach ($posts as $post): ?>
+            <li style=" 
               <?php if ((intval($post['id']) % 2) == 0) {
                         //Es un número par
                         echo 'background-color:rgb(55, 64, 85)';
@@ -91,7 +98,8 @@
               <h2>
             
             </li>
-            <?php endforeach; ?>
+            <?php endforeach;
+            } ?>
           </ul>
       </div>
     </section>
