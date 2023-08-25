@@ -1,4 +1,6 @@
-<h2>Novedades <?php echo $categoria;
+
+<h2>Novedades <?php 
+$posts = getPosts();
 $contador = 0; ?></h2>
 <ul  style="list-style: none;">
 <?php foreach ($posts as $post): 

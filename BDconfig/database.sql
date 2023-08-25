@@ -38,7 +38,7 @@ CREATE TABLE post (
   sinopsis varchar(800) NOT NULL,
   content TEXT NOT NULL,
   date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  image_url varchar(255) DEFAULT NULL
+  image_url varchar(255) DEFAULT NULL,
   tags varchar(100),
   foreign key (id_categoria) references categorias(id_categoria),
   foreign key (id_autor) references autor(id_autor)
