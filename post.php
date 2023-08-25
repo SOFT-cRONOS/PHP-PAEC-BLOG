@@ -44,10 +44,10 @@
               </div>
               <div>
                 <br>
-                  <a href="showPdf.php?id=<?php echo $_GET['id'] ?>">Print PDF</a>
+                  <a href="post.php?id=<?php echo intval($_GET['id']) + 1 ?>">Siguiente articulo</a>
                 <br>
                 <br>
-                  <a href="../">Return to main page</a>
+                  <a href="index.php">Volver a Inicio</a>
               </div>
             </div>
           <!-- barra derehca -->

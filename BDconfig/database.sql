@@ -13,15 +13,33 @@ FLUSH PRIVILEGES;
 -- Creacion de tablas
 USE paecblog;
 
+CREATE TABLE autor {
+    id_autor INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nick varchar(30) NOT NULL,
+    nombre varchar(50),
+    apellido varchar(50),
+    mail varchar(50),
+    profesion varchar(50),
+}
+
+CREATE TABLE categorias(
+    id_categoria INT(3) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nombre varchar(30) NOT NULL,
+    detalle varchar(100)
+)
+
 CREATE TABLE post (
   id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  categoria varchar(30) NOT NULL,
-  author varchar(30) NOT NULL,
+  id_categoria int NOT NULL,
+  id_autor int NOT NULL,
   title varchar(200) NOT NULL,
   sinopsis varchar(800) NOT NULL,
   content TEXT NOT NULL,
   date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   image_url varchar(255) DEFAULT NULL
+  tags varchar(100),
+  foreign key (id_categoria) references categorias(id_categoria),
+  foreign key (id_autor) references autor(id_autor)
 );
  
  

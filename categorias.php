@@ -52,29 +52,46 @@
   <main id="main">
 
     <section class="inner-page">
-      <div class="container mt-5">
-        <!-- contenido -->
+      <div class="container mt-6 list-xl" >
+      <!-- contenido -->
+        <div class="search-container">
+          <form action="categorias.php" method="get">
+            <input type="text" placeholder="buscar.." name="categoria">
+            <button type="submit">Buscar</button>
+          </form>
+        </div>
           <h1>Categorias <?php echo $categoria ?></h1>
+          <br>
+          <br>
           <ul>
-          <?php foreach ($posts as $post): ?>
-          <li>
-            <h2>
-            <a href="post.php?id=<?php echo $post['id'] ?>">
-              <div class="row">
-                <?php echo $post['title'] ?>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <img src="<?php echo $post['image_url'] ?>" class="img-fluid" alt="">
-                  <p><?php echo $post['sinopsis'] ?></p>
+            <?php foreach ($posts as $post): ?>
+            <li style="
+              <?php if ((intval($post['id']) % 2) == 0) {
+                        //Es un número par
+                        echo 'background-color:rgb(55, 64, 85)';
+                    } else {
+                        //Es un número impar
+                        echo 'background-color:#5f6f92';
+                    }
+              ?>                 
+              ">
+              <h2>
+              <a href="post.php?id=<?php echo $post['id'] ?>">
+                <div class="row">
+                  <div class="col-md-5">
+                    <img src="<?php echo $post['image_url'] ?>" class="img-fluid" alt="">
+                  </div>
+                  <div class="col">
+                    <!-- titulo -->
+                    <h2 class="title"><?php echo $post['title'] ?></h2>
+                    <p><?php echo $post['sinopsis'] ?>...</p>
+                  </div>
                 </div>
-              </div>
-
-            </a>
-            <h2>
-          
-          </li>
-          <?php endforeach; ?>
+              </a>
+              <h2>
+            
+            </li>
+            <?php endforeach; ?>
           </ul>
       </div>
     </section>
