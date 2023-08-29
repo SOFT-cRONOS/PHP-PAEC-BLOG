@@ -1,22 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
 <?php 
     // index.php 
     require_once 'modulos/funciones.php';
     // Obtener el valor de la variable "categoria" del enlace (URL)
-    $categoria = $_GET['categoria'];
+    $tag = $_GET['tag'];
 
     // Verificar si la variable "categoria" está definida y no está en blanco
-    if (isset($categoria) && !empty($categoria)) {
-        // $posts = getPostsByCategory($categoria);
-        $posts = getTagsPost($categoria);
+    if (isset($tag) && !empty($tag)) {
+        // $posts = getPostsByCategory($tag);
+        $posts = getTagsPost($tag);
         
     } else {
         $posts = getPosts();
         
     }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -37,7 +36,7 @@
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"> -->
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -46,7 +45,7 @@
 
   <!-- ======= Header ======= -->
   <?php
-  include "themes/navbar.html";
+    include "themes/navbar.html";
   ?>
   <!-- End Header -->
 
@@ -61,13 +60,13 @@
             <button type="submit">Buscar</button>
           </form>
         </div>
-          <h1>Rsultados de <?php echo $categoria ?></h1>
+          <h1>Resultados de <?php echo $tag ?></h1>
           <br>
           <br>
           <?php 
             if (empty($posts)) {
             ?>
-              <h3 class= container>oh! no se encontro nada con <?php echo $categoria ?></h3>
+              <h3 class= container>oh! no se encontro nada con <?php echo $tag ?></h3>
             <?php 
             } else { ?>
           <ul>
@@ -108,24 +107,22 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <?php
-  include "themes/footer.php";
-  ?>
+    <?php
+    include "themes/footer.php";
+    ?>
   <!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- =======   Back top top button =======  -->
+  <?php
+      include "themes/back_to_top.html";
+    ?>
+  <!-- =======   End top top button =======  -->
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-
+  <!-- ======= script links ======= -->
+    <?php
+      include "themes/scripts_links.html";
+    ?>
+  <!-- End script links -->
 </body>
 
 </html>

@@ -214,25 +214,28 @@ function getTagsPost($tags){
 }
 
 
-function getTagsbypost($post){
+function getTagsByPost($post){
     $mysqli = openConex();
 
-    $stmt = $mysqli-> prepare(
-                            "SELECT t.name 
-                            FROM post_tags 
-                            INNER JOIN tags t ON post_tags.tag_id = t.id
-                            WHERE post_tags.post_id = $post"
-                            );
+    $stmt = $mysqli->prepare(
+        "SELECT t.name 
+         FROM post_tags 
+         INNER JOIN tags t ON post_tags.tag_id = t.id
+         WHERE post_tags.post_id = ?"
+    );
+
+    $stmt->bind_param('i', $post);
 
     $stmt->execute();
 
     $result = $stmt->get_result();
 
+    $tags = array(); // Inicializar el array
+
     while ($row = $result->fetch_assoc()) {
-        $tags[] = $row;
+        $tags[] = $row['name']; // Guardar solo el nombre de la etiqueta
     }
 
     return $tags;
-
 }
 ?>

@@ -52,7 +52,7 @@
                     $tags = getTagsbypost($_GET['id']);
                     foreach ($tags as $tag): 
                   ?>
-                  <a class="tags"><?php echo $tag['name']?></a>
+                  <a href="bloglist.php?tag=<?php echo urlencode($tag); ?>" class="tags"><?php echo htmlspecialchars($tag);?></a>
                   <?php
                     endforeach;
                   ?>
@@ -84,18 +84,17 @@
   ?>
   <!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- =======   Back top top button =======  -->
+  <?php
+      include "themes/back_to_top.html";
+    ?>
+  <!-- =======   End top top button =======  -->
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <!-- ======= script links ======= -->
+    <?php
+      include "themes/scripts_links.html";
+    ?>
+  <!-- End script links -->
 
 </body>
 
