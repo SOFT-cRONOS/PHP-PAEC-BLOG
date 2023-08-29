@@ -1,17 +1,17 @@
 <h3 align="center">¡Hey 👋! Bienvenidos a PAEC</h3>
 
-# ¿Que es PAEC?
+# PAEC
 Portal Academico Elaborado por Cronos es un mini blog en php y mysql para material didactico, tutoriales y demas
 
 * Funciones por el momento:
 
-    - [index con ultimo posteo](link sin comillas)
-    - [seccion de filtro por categorias](link sin comillas)
-    - [Base de datos de post](link sin comillas)
+    - [index con ultimo posteo](https://github.com/SOFT-cRONOS/PAEC)
+    - [seccion de filtro por categorias](https://github.com/SOFT-cRONOS/PAEC)
+    - [Base de datos de post](https://github.com/SOFT-cRONOS/PAEC)
 
 * Proximamente:
 
-    - [Editor de post ](link sin comillas)
-    - [login](link sin comillas)
-    - [busqueda por tags](link sin comillas)
-    - [comentarios](link sin comillas)
+    - [Editor de post ](https://github.com/SOFT-cRONOS/PAEC)
+    - [login](https://github.com/SOFT-cRONOS/PAEC)
+    - [busqueda por tags](https://github.com/SOFT-cRONOS/PAEC)
+    - [comentarios](https://github.com/SOFT-cRONOS/PAEC)
