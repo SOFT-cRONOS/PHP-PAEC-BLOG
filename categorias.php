@@ -6,7 +6,8 @@
 
     // Verificar si la variable "categoria" está definida y no está en blanco
     if (isset($categoria) && !empty($categoria)) {
-        $posts = getPostsByCategory($categoria);
+        // $posts = getPostsByCategory($categoria);
+        $posts = getTagsPost($categoria);
         
     } else {
         $posts = getPosts();
@@ -60,7 +61,7 @@
             <button type="submit">Buscar</button>
           </form>
         </div>
-          <h1>Categorias <?php echo $categoria ?></h1>
+          <h1>Rsultados de <?php echo $categoria ?></h1>
           <br>
           <br>
           <?php 
@@ -108,7 +109,7 @@
 
   <!-- ======= Footer ======= -->
   <?php
-  include "themes/footer.html";
+  include "themes/footer.php";
   ?>
   <!-- End Footer -->
 

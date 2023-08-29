@@ -4,12 +4,19 @@
           <div class="row">
 
               <div class="col-lg-3 col-md-6 footer-contact">
-                  <h3>Baker</h3>
+
+                  <h3><?php 
+                  $datos_empresa = getEmpresa();
+                  $direccion = 
+                  $telefono = $datos_empresa['telefono'];
+                  $mail = $datos_empresa['mail'];
+
+                  echo $nombre; ?></h3>
                   <p>
-                      Calle A108<br>
-                      Ciudad de Buenos Aires, Argentina<br><br>
-                      <strong>Teléfono:</strong> +54 11 1234 5678<br>
-                      <strong>Email:</strong> info@ejemplo.com<br>
+                      <?php echo $datos_empresa['direccion'];; ?><br>
+                      BUenos Aires, Argentina<br><br>
+                      <strong>Teléfono: </strong><?php echo $telefono; ?><br>
+                      <strong>Email: </strong><?php echo $mail; ?><br>
                   </p>
               </div>
 
@@ -51,7 +58,7 @@
 
       <div class="me-md-auto text-center text-md-start">
           <div class="copyright">
-            &copy; Copyright <strong><span>PAEC by Soft-cRONOS</span></strong>. Todos los derechos reservados
+            &copy; Copyright <strong><span>PAEC by <a href="https://soft-cronos.com/">Soft-cRONOS</a></span></strong>. Todos los derechos reservados
           </div>
           <div class="credits">
               Diseñado por <a href="https://grupofenix.ar/">GrupoFenix</a>

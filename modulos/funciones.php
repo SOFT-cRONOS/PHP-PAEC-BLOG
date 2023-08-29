@@ -151,4 +151,88 @@ function getCategorias()
 
 }
 
+
+function getEmpresa()
+{
+    $conn = openConex();
+
+    $stmt = $conn->prepare("SELECT * FROM empresa");
+
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    $datos = $result->fetch_assoc();
+    $stmt->close();
+
+    return $datos;
+}
+
+function getTagsPost($tags){
+
+    // Conexión a la base de datos (reemplaza con tus detalles)
+    $mysqli = openConex();
+
+    // Consulta para obtener los IDs de los posts que coinciden con los tags
+    // separo por comas
+    $tagsArray = explode(" ", $tags);
+    // a cada elemento del array con trim elimina los espacios en blanco
+    $tagsArray = array_map('trim', $tagsArray);
+    // toma el array de placeholders y lo combina en una cadena usando la coma como separador y lo usa en la consulta
+    $placeholders = implode(",", array_fill(0, count($tagsArray), "?"));
+    $stmt = $mysqli->prepare("SELECT DISTINCT pt.post_id FROM post_tags pt
+                              JOIN tags t ON pt.tag_id = t.id
+                              WHERE t.name IN ($placeholders)");
+
+    $stmt->bind_param(str_repeat("s", count($tagsArray)), ...$tagsArray);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $postIds = [];
+    while ($row = $result->fetch_assoc()) {
+        $postIds[] = $row['post_id'];
+    }
+
+    // Consulta para obtener los detalles de los posts filtrados
+    $filteredPosts = [];
+    if (!empty($postIds)) {
+        $placeholders = implode(",", array_fill(0, count($postIds), "?"));
+        $stmt = $mysqli->prepare("SELECT * FROM post WHERE id IN ($placeholders)");
+        $stmt->bind_param(str_repeat("i", count($postIds)), ...$postIds);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            $filteredPosts[] = $row;
+        }
+    }
+
+
+    $post = $result->fetch_assoc();
+    return $filteredPosts;
+
+}
+
+
+function getTagsbypost($post){
+    $mysqli = openConex();
+
+    $stmt = $mysqli-> prepare(
+                            "SELECT t.name 
+                            FROM post_tags 
+                            INNER JOIN tags t ON post_tags.tag_id = t.id
+                            WHERE post_tags.post_id = $post"
+                            );
+
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    while ($row = $result->fetch_assoc()) {
+        $tags[] = $row;
+    }
+
+    return $tags;
+
+}
 ?>

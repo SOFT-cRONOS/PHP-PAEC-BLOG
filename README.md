@@ -16,4 +16,4 @@ Portal Academico Elaborado por Cronos es un mini blog en php y mysql para materi
     - login
     - busqueda por tags
     - comentarios
-    - [Más](https://github.com/SOFT-cRONOS/PAEC)
+    - [Más proximamente](https://github.com/SOFT-cRONOS/PAEC)

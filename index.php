@@ -199,7 +199,7 @@ include "themes/head.html";
 
   <!-- ======= Footer ======= -->
   <?php
-  include "themes/footer.html";
+  include "themes/footer.php";
   ?>
   <!-- End Footer -->
 

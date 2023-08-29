@@ -13,6 +13,19 @@ FLUSH PRIVILEGES;
 -- Creacion de tablas
 USE paecblog;
 
+CREATE TABLE empresa (
+    id_empresa INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nombre varchar(30) NOT NULL,
+    abreviatura varchar(5), 
+    mail varchar(50),
+    telefono varchar(50),
+    direccion varchar(50),
+    numero varchar(50)
+);
+
+INSERT INTO empresa (nombre, abreviatura, mail, telefono, direccion, numero) VALUES
+("soft-cronos", "SC", "soft-cronos@gmail.com", "2222222", "sven nation army", "222");
+
 CREATE TABLE autor (
     id_autor INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nick varchar(30) NOT NULL,
@@ -50,6 +63,12 @@ CREATE TABLE tags (
     UNIQUE KEY unique_tag (name)
 );
 
+INSERT INTO tags (name) VALUES 
+("informatica"),
+("python"),
+("excel"),
+("instalar");
+
 CREATE TABLE post_tags (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     post_id INT NOT NULL,
@@ -57,6 +76,13 @@ CREATE TABLE post_tags (
     FOREIGN KEY (post_id) REFERENCES post(id),
     FOREIGN KEY (tag_id) REFERENCES tags(id)
 );
+
+INSERT INTO post_tags (post_id, tag_id) VALUES 
+(1, 3),
+(1, 1),
+(6, 1),
+(6, 2),
+(6, 4);
 
 
 

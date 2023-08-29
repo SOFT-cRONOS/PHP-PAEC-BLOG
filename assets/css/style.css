@@ -191,6 +191,17 @@ h6 {
   padding:0;
 }
 
+.post-footer{
+  padding-top:2rem;
+}
+
+.tags {
+  background-color: #ffc107;
+  border-radius: 10px;
+  color: white;
+  padding: 1.2% 1%;
+}
+
 
 /*--------------------------------------------------------------
 # Back to top button

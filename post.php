@@ -45,7 +45,19 @@
               <div>
                 <?php echo $post['content'] ?>
               </div>
-              <div>
+              <div class="post-footer">
+                <div>
+                  <h6>Tags: 
+                  <?php
+                    $tags = getTagsbypost($_GET['id']);
+                    foreach ($tags as $tag): 
+                  ?>
+                  <a class="tags"><?php echo $tag['name']?></a>
+                  <?php
+                    endforeach;
+                  ?>
+                  </h6> 
+                </div>
                 <br>
                   <a href="post.php?id=<?php echo intval($_GET['id']) + 1 ?>">Siguiente articulo</a>
                 <br>
@@ -68,7 +80,7 @@
 
   <!-- ======= Footer ======= -->
   <?php
-  include "themes/footer.html";
+  include "themes/footer.php";
   ?>
   <!-- End Footer -->
 
