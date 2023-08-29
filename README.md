@@ -8,7 +8,7 @@ Portal Academico Elaborado por Cronos es un mini blog en php y mysql para materi
     - [index con ultimo posteo](https://github.com/SOFT-cRONOS/PAEC)
     - [seccion de filtro por categorias](https://github.com/SOFT-cRONOS/PAEC)
     - [Base de datos de post](https://github.com/SOFT-cRONOS/PAEC)
-    - [Proxi]
+    - Proxi
 
 * Proximamente:
 
