@@ -45,8 +45,9 @@
               <div class="col-lg-4 col-md-6 footer-newsletter">
                   <h4>Buscar</h4>
                   <p>Escribi palabras claves separadas por comas</p>
-                  <form action="" method="post">
-                      <input type="email" name="email"><input type="submit" value="Buscar">
+                  <form action="bloglist.php" method="get">
+                      <input type="text"  name="tag">
+                      <input type="submit" value="Buscar">
                   </form>
               </div>
 

@@ -249,3 +249,98 @@
   new PureCounter();
 
 })()
+
+
+function getOS() {
+  // sistema operativo
+  var OSName = "Unknown";
+  if (navigator.appVersion.indexOf("Win") != -1) OSName = "Windows";
+  if (navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
+  if (navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
+  if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
+  return OSName;
+}
+
+function getNavegador() {
+  // navegador
+  var nVer = navigator.appVersion;
+  var nAgt = navigator.userAgent;
+  var browserName  = navigator.appName;
+  var fullVersion  = ''+parseFloat(navigator.appVersion); 
+  var majorVersion = parseInt(navigator.appVersion,10);
+  var nameOffset,verOffset,ix;
+  if ((verOffset=nAgt.indexOf("MSIE"))!=-1) {
+  browserName = "Microsoft Internet Explorer";
+  fullVersion = nAgt.substring(verOffset+5);}
+  else if ((verOffset=nAgt.indexOf("Opera"))!=-1) {
+  browserName = "Opera";
+  fullVersion = nAgt.substring(verOffset+6);}
+  else if ((verOffset=nAgt.indexOf("Chrome"))!=-1) {
+  browserName = "Chrome";
+  fullVersion = nAgt.substring(verOffset+7);}
+  else if ((verOffset=nAgt.indexOf("Safari"))!=-1) {
+  browserName = "Safari";
+  fullVersion = nAgt.substring(verOffset+7);}
+  else if ((verOffset=nAgt.indexOf("Firefox"))!=-1) {
+  browserName = "Firefox";
+  fullVersion = nAgt.substring(verOffset+8);}
+  else if ( (nameOffset=nAgt.lastIndexOf(' ')+1) < (verOffset=nAgt.lastIndexOf('/')) ) 
+  {browserName = nAgt.substring(nameOffset,verOffset);
+  fullVersion = nAgt.substring(verOffset+1);
+  if (browserName.toLowerCase()==browserName.toUpperCase()) {
+    browserName = navigator.appName;}}
+  if ((ix=fullVersion.indexOf(";"))!=-1) fullVersion=fullVersion.substring(0,ix);
+  if ((ix=fullVersion.indexOf(" "))!=-1) fullVersion=fullVersion.substring(0,ix);
+  majorVersion = parseInt(''+fullVersion,10);
+  if (isNaN(majorVersion)) {
+  fullVersion  = ''+parseFloat(navigator.appVersion); 
+  majorVersion = parseInt(navigator.appVersion,10);}
+  return browserName + 'v.'+fullVersion;
+}
+
+
+function getFecha($formato){
+// fecha de vicita
+  if ($formato  == 'tx') {
+
+    document.write (fechahoy());
+    ahora=new Date();
+    function fechahoy(){var diasemana=new Array('Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado');
+    var nombremes=new Array('Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre');
+    var ahora;
+    var fecha=new Date();
+    var ano=fecha.getFullYear();
+    var mes=fecha.getMonth();
+    var dia=fecha.getDay();
+    var num=fecha.getDate();
+    ahora=diasemana[dia]+", "+num+" de "+nombremes[mes]+" de "+ano;return ahora;}
+    return ahora;
+
+  } else {
+    alert("intentando con la fecha");
+    var fechaActual = new Date();
+
+
+    var formData = new FormData();
+    formData.append("fecha", fechaActual);
+
+    formData.append("accion", "guardar_fecha"); // Nombre del post
+    formData.append("fecha", fechaActual);
+
+    // Realizar una solicitud AJAX para enviar la fecha a PHP
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "../../modulos/handler.php", true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log("Fecha guardada en la base de datos");
+      }
+    };
+    xhr.send(formData);
+  }
+
+}
+
+
+
+
+

@@ -77,12 +77,16 @@ CREATE TABLE post_tags (
     FOREIGN KEY (tag_id) REFERENCES tags(id)
 );
 
-INSERT INTO post_tags (post_id, tag_id) VALUES 
-(1, 3),
-(1, 1),
-(6, 1),
-(6, 2),
-(6, 4);
+CREATE TABLE historial (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    fecha DATE,
+    navegador varchar(50),
+    ip varchar(20),
+    os varchar(50),
+    link varchar(200)
+
+)
+
 
 
 
@@ -96,10 +100,6 @@ INSERT INTO categorias (nombre, detalle) VALUES
 ('software', 'programas gratis para descargar');
 
 INSERT INTO post (id_categoria, id_autor, title, sinopsis, content, date, image_url) VALUES
-(1, 1, 'Titulo 1', 'sinopsis', 'Contenido del post 1', '2017-06-10 21:26:07', 'assets/img/portfolio/portfolio-1.jpg'),
-(1, 1, 'Titulo 2', 'sinopsis', 'Contenido del post 2', '2017-06-11 21:26:07', 'assets/img/images-post/python_lenguaje.jpg'),
-(3, 1, 'Titulo 3', 'sinopsis', 'Contenido del post 3', '2017-06-12 21:26:07', 'assets/img/images-post/python_lenguaje.jpg'),
-(1, 1, 'Titulo 4','sinopsis', 'Contenido del post 4', '2017-06-13 21:26:07', 'assets/img/images-post/python_lenguaje.jpg'),
 (1, 1, 'Lenguaje Python','Python es un lenguaje de programación versátil y de alto nivel. Reconocido por su legibilidad y simplicidad, Python se ha', 'Python es un lenguaje de programación versátil y de alto nivel. Reconocido por su legibilidad y simplicidad, Python se ha convertido en una herramienta esencial en el mundo del desarrollo de software. Su sintaxis clara y estructura intuitiva lo hacen especialmente adecuado tanto para principiantes como para profesionales de la programación.
 
 Python es utilizado en una amplia gama de aplicaciones, desde desarrollo web y aplicaciones móviles hasta análisis de datos, inteligencia artificial y automatización de tareas. Su amplia biblioteca estándar y su capacidad para integrarse con otros lenguajes y tecnologías hacen que sea fácil y rápido crear soluciones eficientes y robustas para diversos desafíos.
@@ -127,4 +127,11 @@ En resumen, Python es un lenguaje poderoso que ofrece una combinación única de
     </ol>
     <p>¡Listo! Ahora tienes Python instalado en tu sistema Windows y estás listo para comenzar a programar. Puedes abrir la línea de comandos y escribir <code>python</code> para acceder al intérprete interactivo de Python o crear archivos <code>.py</code> con tu código y ejecutarlos usando <code>python nombre_del_archivo.py</code>.</p>
 ', '2017-06-14 21:26:07', 'assets/img/images-post/python_install.jpg');
+
+INSERT INTO post_tags (post_id, tag_id) VALUES 
+(1, 2),
+(1, 1),
+(2, 1),
+(2, 2),
+(2, 4);
 

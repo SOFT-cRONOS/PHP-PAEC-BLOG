@@ -4,7 +4,9 @@
     // index.php 
     require_once 'modulos/funciones.php';
     // Obtener el valor de la variable "categoria" del enlace (URL)
-    $tag = $_GET['tag'];
+    $tag = filter_input(INPUT_GET, 'tag', FILTER_SANITIZE_STRING);
+    // limito el string a 20 caracteres
+    $tag = substr($tag, 0, 20);
 
     // Verificar si la variable "categoria" está definida y no está en blanco
     if (isset($tag) && !empty($tag)) {
@@ -55,8 +57,8 @@
       <div class="container mt-6 list-xl" >
       <!-- contenido -->
         <div class="search-container">
-          <form action="categorias.php" method="get">
-            <input type="text" placeholder="buscar.." name="categoria">
+          <form action="bloglist.php" method="get">
+            <input type="text" placeholder="buscar.." name="tag">
             <button type="submit">Buscar</button>
           </form>
         </div>

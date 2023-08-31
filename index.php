@@ -78,63 +78,75 @@ include "themes/head.html";
           <div class="row">
 
             <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <a href="index.php#portfolio">
               <div class="icon-box iconbox-blue">
                 <div class="icon">
                   <i class="bx bxl-dribbble"></i>
                 </div>
-                <h4><a href="">Internet</a></h4>
+                <h4><a href="index.php#portfolio">Internet</a></h4>
                 <p>Programas para navegar, seguridad y redes informaticas</p>
               </div>
+            </a>
             </div>
 
             <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+            <a href="index.php#portfolio">
               <div class="icon-box iconbox-orange ">
                 <div class="icon">
                   <i class="bx bx-file"></i>
                 </div>
-                <h4><a href="">Documentos</a></h4>
+                <h4><a href="index.php#portfolio">Documentos</a></h4>
                 <p>Procesadores de texto, planillas de calculo, presentaciones, PDF, Notas</p>
               </div>
+            </a>
             </div>
 
             <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
+            <a href="index.php#portfolio">
               <div class="icon-box iconbox-pink">
                 <div class="icon">
                   <i class="bx bx-tachometer"></i>
                 </div>
-                <h4><a href="">Mantenimiento</a></h4>
+                <h4><a href="index.php#portfolio">Mantenimiento</a></h4>
                 <p>Tutoriales y programas para mantenimiento, optimizacion y control del PC</p>
               </div>
+            </a>
             </div>
             
             <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
+            <a href="index.php#portfolio">
               <div class="icon-box iconbox-yellow">
                 <div class="icon">
                   <i class="bx bx-layer"></i>
                 </div>
-                <h4><a href="">Programacion</a></h4>
+                <h4><a href="index.php#portfolio">Programacion</a></h4>
                 <p>SQL, PYTHON, PHP y mas lenguajes. IDE'S con ejemplos de software basico y avanzado</p>
               </div>
+            </a>
             </div>
 
             <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
+            <a href="index.php#portfolio">
               <div class="icon-box iconbox-red">
                 <div class="icon">
                   <i class="bx bx-slideshow"></i>
                 </div>
-                <h4><a href="">Multimedia</a></h4>
+                <h4><a href="index.php#portfolio">Multimedia</a></h4>
                 <p>Material didactico, entretenimiento y software multimedia</p>
               </div>
+            </a>
             </div>
 
             <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+              <a href="index.php#portfolio">
               <div class="icon-box iconbox-teal">
                 <div class="icon">
                   <i class="bx bx-arch"></i>
                 </div>
-                <h4><a href="">Explorar</a></h4>
+                <h4><a href="index.php#portfolio">Explorar</a></h4>
                 <p>Actualizaremos contenido nuevo, explora ahora.</p>
               </div>
+              </a>
             </div>
 
           </div>
@@ -214,6 +226,52 @@ include "themes/head.html";
       include "themes/scripts_links.html";
     ?>
   <!-- End script links -->
+
+
+
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+  registrarVisita();
+});
+
+function registrarVisita() {
+  var fechaActual = new Date();
+  var year = fechaActual.getFullYear();
+  var month = String(fechaActual.getMonth() + 1).padStart(2, '0');
+  var day = String(fechaActual.getDate()).padStart(2, '0');
+
+  var fechaFormateada = year + '-' + month + '-' + day;
+
+
+  var navegador = getNavegador();
+  var ip = '192.168.1.c'; // Puedes usar una API para obtener la IP
+  var os = getOS();
+  // var link = window.location.href;
+  var link = "pedro";
+
+  var formData = new FormData();
+  formData.append("accion", "guardar_fecha");
+  formData.append("fecha", fechaFormateada);
+  formData.append("navegador", navegador);
+  formData.append("ip", ip);
+  formData.append("os", os);
+  formData.append("link", link);
+  
+  console.log("Contenido de FormData:");
+  for (var pair of formData.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+  }
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "modulos/handler.php", true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log("Visita registrada en la base de datos");
+    }
+  };
+  xhr.send(formData);
+}
+</script>
 
 </body>
 
