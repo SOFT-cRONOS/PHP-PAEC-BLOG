@@ -299,9 +299,9 @@ function getNavegador() {
 }
 
 
-function getFecha($formato){
+function getFecha(formato){
 // fecha de vicita
-  if ($formato  == 'tx') {
+  if (formato  == 'tx') {
 
     document.write (fechahoy());
     ahora=new Date();
@@ -317,30 +317,233 @@ function getFecha($formato){
     return ahora;
 
   } else {
-    alert("intentando con la fecha");
     var fechaActual = new Date();
+    var year = fechaActual.getFullYear();
+    var month = String(fechaActual.getMonth() + 1).padStart(2, '0');
+    var day = String(fechaActual.getDate()).padStart(2, '0');
 
-
-    var formData = new FormData();
-    formData.append("fecha", fechaActual);
-
-    formData.append("accion", "guardar_fecha"); // Nombre del post
-    formData.append("fecha", fechaActual);
-
-    // Realizar una solicitud AJAX para enviar la fecha a PHP
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "../../modulos/handler.php", true);
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        console.log("Fecha guardada en la base de datos");
-      }
-    };
-    xhr.send(formData);
+    var fechaFormateada = year + '-' + month + '-' + day;
+    return fechaFormateada
   }
 
 }
 
 
 
+function registrarVisita(token) {
+  
+
+  var fecha = getFecha('bd');
+  var navegador = getNavegador();
+  var os = getOS();
+  var link = window.location.href;
+
+  var formData = new FormData();
+  formData.append("accion", "guardar_fecha");
+  formData.append("fecha", fecha);
+  formData.append("navegador", navegador);
+  formData.append("token", token);
+  formData.append("os", os);
+  formData.append("link", link);
+  
+  console.log("Contenido de FormData:");
+  for (var pair of formData.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+  }
 
 
+  fetch(`modulos/funciones.php`, {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al agregar historial');
+        }
+        return response.json();
+      })
+      .then(() => {
+        // renderizar html
+        alert('tu vicita fue registrada')
+        
+      })
+      .catch(error => {
+        console.log(error);
+        console.error('Error:', error);
+        
+      })
+      .finally(() => {
+        console.log('Promesa finalizada (resuelta o rechazada)');
+      });
+}
+
+function registrarVisitante(token){
+  
+  var fecha = getFecha('bd');
+
+  var formData = new FormData();
+  formData.append("accion", "reg_visitor");
+  formData.append("fecha", fecha);
+  formData.append("token", token);
+  
+
+  console.log("Usuario a registrar:");
+  for (var pair of formData.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+  }
+
+  fetch(`modulos/funciones.php`, {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al agregar historial');
+        }
+        return response.json();
+      })
+      .then(() => {
+        // renderizar html
+        alert('tu vicita fue registrada')
+        
+      })
+      .catch(error => {
+        console.log(error);
+        console.error('Error:', error);
+        
+      })
+      .finally(() => {
+        console.log('Promesa finalizada (resuelta o rechazada)');
+      });
+}
+
+// Función para generar un token único
+function generateToken() {
+  var chk = false;
+  var cont = 0;
+  var token = '';
+  while (chk === false){
+    const timestamp = Date.now().toString(); // Marca de tiempo actual
+    const randomPart = Math.random().toString(36).substr(2, 5); // Parte aleatoria
+    token = timestamp + randomPart;
+    chk = validarToken(token) // Llamada a la función asíncrona para validar token
+    cont = cont +1;
+    if (cont === 4){
+      break;
+    }
+  };
+  return token
+}
+
+// validar token en base de datos
+function validarToken(token) {
+  const formData = new FormData();
+  formData.append("accion", "val_token");
+  formData.append("token", token);
+  var respuesta = false;
+  fetch(`modulos/funciones.php`, {
+    method: 'GET',
+    body: formData
+  })
+  .then(response => handleResponse(response))
+  .then((data) => {
+    console.log("token validado")
+    respuesta = true;
+  })
+  .catch((error) => {
+    console.log("no se puede validar el token")
+    console.log("Promesa rechazada por", error);
+    var respuesta = false;
+  })
+  .finally(() => {
+    console.log("Promesa finalizada (resuelta o rechazada)");
+    // finalmente hace esto
+  });
+  return respuesta
+}
+
+// Función para guardar el token en una cookie
+function setTokenCookie(token) {
+  const expirationDate = new Date();
+  expirationDate.setFullYear(expirationDate.getFullYear() + 1); // Expira en 1 año
+
+  document.cookie = `userToken=${encodeURIComponent(token)}; expires=${expirationDate.toUTCString()}; path=/`;
+}
+
+// Función para verificar si ya se registró la visita hoy
+function checkLastVisit() {
+  const lastVisitCookie = getCookie('lastVisit');
+
+  if (lastVisitCookie) {
+    const lastVisitDate = new Date(lastVisitCookie);
+    const currentDate = new Date();
+
+    if (currentDate.getDate() !== lastVisitDate.getDate()) {
+      // Registrar visita y actualizar la cookie
+      // setLastVisitCookie();
+      // console.log('Visita registrada hoy.');
+      return 2
+    } else {
+      // console.log('Visita ya registrada hoy.');
+      return 1
+    }
+  } else {
+    // Primera visita, registrar y establecer la cookie
+    // setLastVisitCookie();
+    // console.log('Primera visita registrada.');
+    return 0
+  }
+}
+
+// Función para establecer una cookie con la fecha de última visita
+function setLastVisitCookie() {
+  const currentDate = new Date();
+  const expirationDate = new Date(currentDate);
+  expirationDate.setHours(23, 59, 59, 999); // Establecer hora final del día
+
+  document.cookie = `lastVisit=${currentDate.toUTCString()}; expires=${expirationDate.toUTCString()}; path=/`;
+}
+
+// Función para obtener el valor de una cookie por su nombre
+function getCookie(name) {
+  const cookies = document.cookie.split(';');
+  for (const cookie of cookies) {
+    const [cookieName, cookieValue] = cookie.trim().split('=');
+    if (cookieName === name) {
+      return decodeURIComponent(cookieValue);
+    }
+  }
+  return null;
+}
+
+// evento load para registro de visita
+document.addEventListener("DOMContentLoaded", function() {
+  var tip_user = checkLastVisit();
+  console.log(tip_user);
+
+  if (tip_user === 0) {
+    var tokenu = generateToken();
+    console.log('Token único generado:', tokenu);
+    setTokenCookie(tokenu);
+    registrarVisitante(tokenu)
+    setLastVisitCookie();
+    registrarVisita(tokenu)
+
+  // registrarVisita();
+  } else if (tip_user === 1){
+      var tokenu = getCookie('userToken');
+      registrarVisita('test')
+
+  } else if (tip_user === 2) {
+    setLastVisitCookie();
+    var tokenu = getCookie('userToken');
+    if (tokenu === null) {
+      tokenu = generateToken();
+      console.log('Token único generado2:', tokenu);
+      setTokenCookie(tokenu);
+      registrarVisitante(tokenu)
+    }
+    console.log('usuario es 2')
+    console.log(tokenu);
+  };
+});

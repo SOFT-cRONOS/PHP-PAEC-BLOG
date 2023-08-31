@@ -77,15 +77,26 @@ CREATE TABLE post_tags (
     FOREIGN KEY (tag_id) REFERENCES tags(id)
 );
 
+CREATE TABLE visitantes (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    token varchar(25) NOT NULL,
+    fecha DATE
+);
+
+-- index para enlazar token con token 
+CREATE INDEX idx_token ON visitantes (token);
+
 CREATE TABLE historial (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     fecha DATE,
     navegador varchar(50),
-    ip varchar(20),
+    token varchar(25) NOT NULL,
     os varchar(50),
-    link varchar(200)
+    link varchar(200),
+    FOREIGN KEY (token) REFERENCES visitantes(token)
+);
 
-)
+
 
 
 

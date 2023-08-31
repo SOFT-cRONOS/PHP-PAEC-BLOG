@@ -238,4 +238,86 @@ function getTagsByPost($post){
 
     return $tags;
 }
+
+
+// Metodos POST
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Verificar si se envió la acción "guardar_fecha"
+    if (isset($_POST["accion"]) && $_POST["accion"] == "guardar_fecha") {
+        echo "tratando de registrar la vicita lcdm";
+        $fecha = $_POST["fecha"];        
+        $navegador = $_POST["navegador"];
+        $token = $_POST["token"];
+        $os = $_POST["os"];
+        $link = $_POST["link"];
+
+        echo $fecha;
+        echo $navegador;
+        echo $token;
+        echo $os;
+        echo $link;
+        
+        $mysqli = openConex();
+
+        $stmt = $mysqli->prepare("INSERT INTO historial (fecha, navegador, token, os, link) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $fecha, $navegador, $token, $os, $link);
+        
+        if ($stmt->execute()) {
+            echo "Vista registrada correctamente";
+        } else {
+            echo "Error al registcxcrar la vista";
+        }
+
+        $stmt->close();
+        $mysqli->close();
+
+    } else if (isset($_POST["accion"]) && $_POST["accion"] == "reg_visitor") {
+        $fecha = $_POST["fecha"];
+        $token = $_POST["token"];
+
+        $mysqli = openConex();
+        
+        $stmt = $mysqli->prepare("INSERT INTO visitantes (token, fecha) VALUES (?, ?)");
+        $stmt->bind_param("ss", $token, $fecha);
+        
+        if ($stmt->execute()) {
+            echo "visitante registrada correctamente";
+        } else {
+            echo "Error al registrar al visitante";
+        }
+
+        $stmt->close();
+        $mysqli->close();
+    }
+}
+
+// Metodos GET
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    // Validacion de token"
+    if (isset($_POST["accion"]) && $_POST["accion"] === "val_token") {
+
+        // Recuperar el token enviado desde el cliente
+        $data = json_decode(file_get_contents('php://input'), true);
+        $token = $data['token'];
+            
+        $conn = openConex();
+
+        $stmt = $conn->prepare("SELECT COUNT(*) as count FROM visitantes WHERE token = :token");
+        $stmt->bind_param(':token', $token);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $response = ['unique' => ($result['count'] == '0')];
+        
+        header('Content-Type: application/json');
+        echo json_encode($response);
+
+
+    } else {
+        // Si la acción no es "guardar_fecha", manejar otras acciones aquí
+        // ...
+    }
+}
 ?>

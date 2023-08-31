@@ -228,51 +228,6 @@ include "themes/head.html";
   <!-- End script links -->
 
 
-
-  <script>
-document.addEventListener("DOMContentLoaded", function() {
-  registrarVisita();
-});
-
-function registrarVisita() {
-  var fechaActual = new Date();
-  var year = fechaActual.getFullYear();
-  var month = String(fechaActual.getMonth() + 1).padStart(2, '0');
-  var day = String(fechaActual.getDate()).padStart(2, '0');
-
-  var fechaFormateada = year + '-' + month + '-' + day;
-
-
-  var navegador = getNavegador();
-  var ip = '192.168.1.c'; // Puedes usar una API para obtener la IP
-  var os = getOS();
-  // var link = window.location.href;
-  var link = "pedro";
-
-  var formData = new FormData();
-  formData.append("accion", "guardar_fecha");
-  formData.append("fecha", fechaFormateada);
-  formData.append("navegador", navegador);
-  formData.append("ip", ip);
-  formData.append("os", os);
-  formData.append("link", link);
-  
-  console.log("Contenido de FormData:");
-  for (var pair of formData.entries()) {
-      console.log(pair[0] + ': ' + pair[1]);
-  }
-
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "modulos/handler.php", true);
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      console.log("Visita registrada en la base de datos");
-    }
-  };
-  xhr.send(formData);
-}
-</script>
-
 </body>
 
 </html>
