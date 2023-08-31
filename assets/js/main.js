@@ -518,31 +518,42 @@ function getCookie(name) {
 
 // evento load para registro de visita
 document.addEventListener("DOMContentLoaded", function() {
+  // chequeo si es la primer vicita 0, ya entro hoy 1, entro ayer 2
   var tip_user = checkLastVisit();
   console.log(tip_user);
 
   if (tip_user === 0) {
 
+    // el usuario es nuevo, genero un token unico
     var tokenu = generateToken();
+    // guardo el token en la cookie por 1 año
     setTokenCookie(tokenu);
+    // registro el token en la bd 
     registrarVisitante(tokenu)
+    // seteo la fecha de visita en el cookie
     setLastVisitCookie();
+    // registro el link donde ingresa
     registrarVisita(tokenu)
 
-
   } else if (tip_user === 1){
-
+      // leo el token de la cookie
       var tokenu = getCookie('userToken');
-      registrarVisita(tokenu)
+      // registro el link donde ingresa
+      // registrarVisita(tokenu)
+      // la idea es q registre en cookie y despues suba, para no hacer consultas
 
   } else if (tip_user === 2) {
-
+    // como entro ayer registro la fecha
     setLastVisitCookie();
+    // tomo el token de la cookie
     var tokenu = getCookie('userToken');
+    // si es nulo lo genero
     if (tokenu === null) {
       tokenu = generateToken();
       setTokenCookie(tokenu);
       registrarVisitante(tokenu)
     }
+    // registro el link donde ingresa
+    registrarVisita(tokenu)
   };
 });
