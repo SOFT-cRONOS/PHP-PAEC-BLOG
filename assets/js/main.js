@@ -480,17 +480,14 @@ function checkLastVisit() {
 
     if (currentDate.getDate() !== lastVisitDate.getDate()) {
       // Registrar visita y actualizar la cookie
-      // setLastVisitCookie();
-      // console.log('Visita registrada hoy.');
+      // Visita registrada hoy
       return 2
     } else {
-      // console.log('Visita ya registrada hoy.');
+      //Visita ya registrada hoy
       return 1
     }
   } else {
     // Primera visita, registrar y establecer la cookie
-    // setLastVisitCookie();
-    // console.log('Primera visita registrada.');
     return 0
   }
 }
@@ -516,8 +513,27 @@ function getCookie(name) {
   return null;
 }
 
+function handleResponse(response) {
+  if (!response.ok) {
+    return Promise.reject({
+      message:
+        "HTTP Code:" +
+        response.status +
+        "- Description:" +
+        response.statusText,
+    });
+  } else {
+    return response.json();
+  }
+}
+
+
+
+
 // evento load para registro de visita
 document.addEventListener("DOMContentLoaded", function() {
+
+
   // chequeo si es la primer vicita 0, ya entro hoy 1, entro ayer 2
   var tip_user = checkLastVisit();
   console.log(tip_user);
@@ -556,4 +572,36 @@ document.addEventListener("DOMContentLoaded", function() {
     // registro el link donde ingresa
     registrarVisita(tokenu)
   };
+    
+
+    //test
+    fetch('modulos/funciones.php?accion=get_cat', {
+      method: 'GET',
+    })
+    .then(response => response.json())// Parsea la respuesta como JSON
+    .then((data) => {
+        const listacategorias = document.getElementById("portfolio-flters-test");
+  
+        // Limpiar el contenido actual de la lista
+        listacategorias.innerHTML = "";
+        // Iterar a través de los datos y construir los elementos <li> de la lista
+        data.forEach(categoria => {
+            const newLi = document.createElement("li");
+            console.log(categoria.nombre);
+            newLi.dataset.filter = `.${categoria.nombre}`;
+            newLi.textContent = categoria.nombre;
+            listacategorias.appendChild(newLi);
+        });
+  
+    })
+    .catch((error) => {
+        console.log("Promesa rechazada", error);
+        // Si dio error, hacer algo al respecto
+    })
+    .finally(() => {
+        console.log("Promesa finalizada ");
+        // Finalmente, hacer algo
+    });
+  
+    //fin test
 });

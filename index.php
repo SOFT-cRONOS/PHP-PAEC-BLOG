@@ -177,6 +177,13 @@ include "themes/head.html";
             </div>
           </div>
 
+          <div class="row">
+            <div class="col-lg-12 d-flex justify-content-center">
+              <ul id="portfolio-flters-test">
+              </ul>
+            </div>
+          </div>
+
           <div class="row portfolio-container">
 
           
