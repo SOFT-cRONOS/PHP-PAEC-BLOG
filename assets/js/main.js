@@ -522,28 +522,27 @@ document.addEventListener("DOMContentLoaded", function() {
   console.log(tip_user);
 
   if (tip_user === 0) {
+
     var tokenu = generateToken();
-    console.log('Token único generado:', tokenu);
     setTokenCookie(tokenu);
     registrarVisitante(tokenu)
     setLastVisitCookie();
     registrarVisita(tokenu)
 
-  // registrarVisita();
+
   } else if (tip_user === 1){
+
       var tokenu = getCookie('userToken');
-      registrarVisita('test')
+      registrarVisita(tokenu)
 
   } else if (tip_user === 2) {
+
     setLastVisitCookie();
     var tokenu = getCookie('userToken');
     if (tokenu === null) {
       tokenu = generateToken();
-      console.log('Token único generado2:', tokenu);
       setTokenCookie(tokenu);
       registrarVisitante(tokenu)
     }
-    console.log('usuario es 2')
-    console.log(tokenu);
   };
 });
