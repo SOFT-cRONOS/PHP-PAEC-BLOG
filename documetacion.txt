@@ -14,9 +14,14 @@ sudo ufw allow in "Apache"
 sudo ufw allow http
 sudo ufw allow https
 
-instalar mysql
+
+sudo ufw enable
+
+
+instalar mysqlw
 sudo apt-get install mysql-server
 pass: 75321
+pass: 7cronos1
 
 instalacion php
 sudo apt-get install php libapache2-mod-php php-mysql php-cgi php-curl php-json
@@ -111,6 +116,7 @@ sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-availab
 
 editamos el archivo de configuracion
 sudo nano /etc/apache2/sites-available/sitio.conf
+*nuevo en /www/paec
 
 cambiamos el directorio
 	defautl = DocumentRoot /var/www/html
