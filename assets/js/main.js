@@ -552,13 +552,16 @@ document.addEventListener("DOMContentLoaded", function() {
     registrarVisita(tokenu)
 
   } else if (tip_user === 1){
+      //1 es un uruario registrado e ingresando
+      //comentar o descomentar para registro de todos los clicks
       // leo el token de la cookie
       var tokenu = getCookie('userToken');
       // registro el link donde ingresa
-      // registrarVisita(tokenu)
+      registrarVisita(tokenu)
       // la idea es q registre en cookie y despues suba, para no hacer consultas
 
   } else if (tip_user === 2) {
+    //2 es un usuario registrado volviendo a la web
     // como entro ayer registro la fecha
     setLastVisitCookie();
     // tomo el token de la cookie

@@ -13,6 +13,7 @@
   --color-primario: #a9a1e4;
   --color-secundario: #26283d;
   --color-terciario:#60648b;
+  --color-resaltado: #b750df;
   --color-obscuro: #120907;
   --color-claro:#f3dced;
   --color-degradado: rgba(38, 40, 61, 0.9);
@@ -219,6 +220,21 @@ h6 {
   border-radius: 10px;
   color: white;
   padding: 1.2% 1%;
+}
+
+code {
+  color: var(--color-resaltado)
+}
+
+.codigo {
+  padding: 1.3rem;
+  background-color: var(--color-secundario);
+  border-radius: 15px 10px;
+  color: var(--color-claro);
+  margin-bottom: 15px;
+}
+.codigo code {
+  color: var(--color-claro);
 }
 
 
