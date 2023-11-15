@@ -96,7 +96,13 @@ CREATE TABLE historial (
     FOREIGN KEY (token) REFERENCES visitantes(token)
 );
 
-
+CREATE TABLE medios (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    fecha DATE,
+    nombre varchar(50),
+    detalle varchar(50),
+    link varchar(200),
+)
 
 
 

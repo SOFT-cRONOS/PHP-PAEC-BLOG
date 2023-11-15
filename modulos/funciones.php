@@ -238,6 +238,52 @@ function getTagsByPost($post){
     return $tags;
 }
 
+function setNTags($tags_list){
+    //conexión a la base de datos
+    $conn  = openConex();
+
+    // Obtener los tags ingresados por el usuario desde el input (supongamos que están separados por comas)
+    $tags_input = $_POST["tags"]; // Asegúrate de que el nombre del campo coincida con tu formulario
+    #separa el str por la coma
+    $tags_list = explode(',', $tags_input);
+
+    // Recorrer la lista de tags ingresados
+    foreach ($tags_list as $tag_name) {
+        // Escapar el nombre del tag para evitar SQL injection
+        $tag_name = mysqli_real_escape_string($conn, trim($tag_name));
+
+        // Verificar si el tag ya existe en la tabla tags
+        $sql = "SELECT id FROM tags WHERE name = '$tag_name'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // El tag ya existe, obtener su id
+            $row = $result->fetch_assoc();
+            $tag_id = $row["id"];
+        } else {
+            // El tag no existe, insertarlo en la tabla tags y obtener su id
+            $sql = "INSERT INTO tags (name) VALUES ('$tag_name')";
+            if ($conn->query($sql) === TRUE) {
+                $tag_id = $conn->insert_id;
+            } else {
+                echo "Error al insertar el tag: " . $conn->error;
+                continue; // Continuar con el siguiente tag si hay un error
+            }
+        }
+
+        // Crear la relación en la tabla post_tags (reemplaza 1 con el ID del nuevo post)
+        $post_id = 1;
+        $sql = "INSERT INTO post_tags (post_id, tag_id) VALUES ($post_id, $tag_id)";
+        if ($conn->query($sql) !== TRUE) {
+            echo "Error al crear la relación: " . $conn->error;
+        }
+    }
+
+    // Cerrar la conexión
+    $conn->close();
+}
+
+
 // Fin geters de contenido
 
 // Metodos POST
@@ -292,10 +338,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // FIN Registro de nuevo vicitante (uso de cookies token)
 }
 
+
 // Metodos GET
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    
     // Validacion de token no funciona, deberia entregar un dato"
-        if (isset($_POST["accion"]) && $_POST["accion"] === "val_token") {
+        if (isset($_GET["accion"]) && $_GET["accion"] === "val_token") {
 
             // Recuperar el token enviado desde el cliente
             $token = $_POST["token"];
@@ -320,7 +368,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $mysqli->close();
 
 
-        } elseif (isset($_POST["accion"]) && $_POST["accion"] === "get_cat") {
+        } elseif (isset($_GET["accion"]) && $_GET["accion"] === "get_cat") {
             echo json_encode("hola");
             $mysqli = openConex();
     
@@ -341,6 +389,20 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     
             $stmt->close();
             $mysqli->close();
+
+        } elseif (isset($_GET["accion"]) && $_GET["accion"] === "get_categorias") {
+            // devuelve las categorias al js
+            $result = getCategorias();
+
+            if ($result->num_rows > 0) {
+                $categorias = array();
+                while ($row = $result->fetch_assoc()) {
+                    $categorias[] = $row;
+                }
+                echo json_encode($categorias); // Devolver las categorías en formato JSON
+            } else {
+                echo json_encode([]); // Devolver un array vacío si no hay categorías
+            }
         }
     // FIN Validacion de token no funciona, deberia entregar un dato"
 }
